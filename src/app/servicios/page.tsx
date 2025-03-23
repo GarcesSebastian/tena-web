@@ -71,10 +71,10 @@ export default function Servicios() {
         setLoading(true)
         setError(null)
         
-        const response = await fetch(${API_URL}/services/get)
+        const response = await fetch(`${API_URL}/services/get`)
         
         if (!response.ok) {
-          throw new Error(Error en la respuesta: ${response.status} ${response.statusText})
+          throw new Error(`Error en la respuesta: ${response.status} ${response.statusText}`)
         }
         
         const data = await response.json()
@@ -138,7 +138,7 @@ export default function Servicios() {
     try {
       setFormLoading(true)
       
-      const response = await fetch(${API_URL}/services/create, {
+      const response = await fetch(`${API_URL}/services/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -147,12 +147,12 @@ export default function Servicios() {
       })
       
       if (!response.ok) {
-        throw new Error(Error en la respuesta: ${response.status} ${response.statusText})
+        throw new Error(`Error en la respuesta: ${response.status} ${response.statusText}`)
       }
       
       const responseData = await response.json()
       
-      const newId = responseData.servicio?.id || temp-${Date.now()}
+      const newId = responseData.servicio?.id || `temp-${Date.now()}`
       
       const newService = {
         id: newId,
@@ -213,12 +213,12 @@ export default function Servicios() {
         return
       }
       
-      const response = await fetch(${API_URL}/services/delete/${id}, {
+      const response = await fetch(`${API_URL}/services/delete/${id}`, {
         method: "DELETE"
       })
       
       if (!response.ok) {
-        throw new Error(Error en la respuesta: ${response.status} ${response.statusText})
+        throw new Error(`Error en la respuesta: ${response.status} ${response.statusText}`)
       }
       
       showNotification("success", "Servicio eliminado correctamente")
@@ -278,7 +278,7 @@ export default function Servicios() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-7xl">
               {services.map((item, index) => (
                 <div
-                  key={service-${item.id}}
+                  key={`service-${item.id}`}
                   className="group relative overflow-hidden rounded-xl shadow-lg"
                 >
                   <div 
