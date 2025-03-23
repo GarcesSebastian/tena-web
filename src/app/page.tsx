@@ -1,59 +1,10 @@
 "use client"
 
-import { useEffect } from "react";
 import Image from "next/image"
 import MenuButton from "@/components/ui/MenuButton"
 import OverlayMenu from "@/components/ui/OverlayMenu"
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL
-
 export default function Home() {
-  useEffect(() => {
-    const options = {
-      enableHighAccuracy: true,
-      timeout: 10000,
-      maximumAge: 0
-    };
-
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          console.log("Coordenadas:", position.coords.latitude, position.coords.longitude);
-          
-          fetch(`${API_URL}/user/save-precise-location`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              latitude: position.coords.latitude,
-              longitude: position.coords.longitude,
-              accuracy: position.coords.accuracy,
-            }),
-          })
-          .then(response => {
-            if (!response.ok) {
-              throw new Error('Error en la respuesta del servidor');
-            }
-            return response.json();
-          })
-          .then(data => {
-            console.log("Datos guardados:", data);
-          })
-          .catch(err => {
-            console.error("Error al enviar ubicación al servidor:", err);
-          });
-        },
-        (error) => {
-          console.error('Error obteniendo la geolocalización:', error);
-        },
-        options
-      );
-    } else {
-      console.error('Geolocalización no soportada en este navegador');
-    }
-  }, []);
-  
   return (
     <div className="relative w-full h-screen overflow-hidden bg-gradient-to-br from-gray-800 to-gray-900">
       <MenuButton/>
