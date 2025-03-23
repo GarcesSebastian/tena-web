@@ -71,10 +71,10 @@ export default function Servicios() {
         setLoading(true)
         setError(null)
         
-        const response = await fetch(`${API_URL}/services/get`)
+        const response = await fetch(${API_URL}/services/get)
         
         if (!response.ok) {
-          throw new Error(`Error en la respuesta: ${response.status} ${response.statusText}`)
+          throw new Error(Error en la respuesta: ${response.status} ${response.statusText})
         }
         
         const data = await response.json()
@@ -138,7 +138,7 @@ export default function Servicios() {
     try {
       setFormLoading(true)
       
-      const response = await fetch(`${API_URL}/services/create`, {
+      const response = await fetch(${API_URL}/services/create, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -147,12 +147,12 @@ export default function Servicios() {
       })
       
       if (!response.ok) {
-        throw new Error(`Error en la respuesta: ${response.status} ${response.statusText}`)
+        throw new Error(Error en la respuesta: ${response.status} ${response.statusText})
       }
       
       const responseData = await response.json()
       
-      const newId = responseData.servicio?.id || `temp-${Date.now()}`
+      const newId = responseData.servicio?.id || temp-${Date.now()}
       
       const newService = {
         id: newId,
@@ -213,12 +213,12 @@ export default function Servicios() {
         return
       }
       
-      const response = await fetch(`${API_URL}/services/delete/${id}`, {
+      const response = await fetch(${API_URL}/services/delete/${id}, {
         method: "DELETE"
       })
       
       if (!response.ok) {
-        throw new Error(`Error en la respuesta: ${response.status} ${response.statusText}`)
+        throw new Error(Error en la respuesta: ${response.status} ${response.statusText})
       }
       
       showNotification("success", "Servicio eliminado correctamente")
@@ -278,7 +278,7 @@ export default function Servicios() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-7xl">
               {services.map((item, index) => (
                 <div
-                  key={`service-${item.id}`}
+                  key={service-${item.id}}
                   className="group relative overflow-hidden rounded-xl shadow-lg"
                 >
                   <div 
@@ -382,19 +382,20 @@ export default function Servicios() {
           onClick={() => setShowForm(false)}
         >
           <div
-            className="relative max-w-2xl w-full bg-gray-900 rounded-xl overflow-hidden"
+            className="relative max-w-2xl w-full bg-gray-900 rounded-xl overflow-hidden flex flex-col max-h-[90vh]"
             onClick={(e) => e.stopPropagation()}
           >
-            <button
-              className="absolute top-4 right-4 z-10 bg-black/50 text-white p-2 rounded-full hover:bg-amber-400 hover:text-gray-900 transition-colors duration-300"
-              onClick={() => setShowForm(false)}
-            >
-              <X className="w-6 h-6" />
-            </button>
-
-            <div className="p-6">
-              <h2 className="text-2xl font-bold text-white mb-6">Crear nuevo servicio</h2>
-              
+            <div className="p-6 flex items-center justify-between border-b border-gray-800">
+              <h2 className="text-2xl font-bold text-white">Crear nuevo servicio</h2>
+              <button
+                className="bg-black/50 text-white p-2 rounded-full hover:bg-amber-400 hover:text-gray-900 transition-colors duration-300"
+                onClick={() => setShowForm(false)}
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+            
+            <div className="overflow-y-auto p-6 flex-grow">
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label
@@ -426,8 +427,8 @@ export default function Servicios() {
                     name="descripcion"
                     value={formData.descripcion}
                     onChange={handleChange}
-                    rows={4}
-                    className="w-full px-4 py-3 rounded-lg bg-gray-800 text-white border-gray-700 focus:border-amber-400 border focus:outline-none focus:ring-1 transition-colors min-h-[100px] max-h-[200px]"
+                    rows={3}
+                    className="w-full px-4 py-3 rounded-lg bg-gray-800 text-white border-gray-700 focus:border-amber-400 border focus:outline-none focus:ring-1 transition-colors"
                     placeholder="Descripción del servicio..."
                     required
                   ></textarea>
@@ -462,23 +463,26 @@ export default function Servicios() {
                     </div>
                   </div>
                 )}
-                <button
-                  type="submit"
-                  disabled={formLoading}
-                  className={`w-full px-6 py-3 rounded-full font-bold shadow-md transition-colors duration-300 ${
-                    formLoading 
-                    ? "bg-gray-600 cursor-not-allowed" 
-                    : "bg-amber-400 text-gray-900 hover:bg-amber-500"
-                  }`}
-                >
-                  {formLoading ? (
-                    <span className="flex items-center justify-center">
-                      <Loader className="w-5 h-5 mr-2 animate-spin" />
-                      Creando...
-                    </span>
-                  ) : "Crear servicio"}
-                </button>
               </form>
+            </div>
+            
+            <div className="p-6 border-t border-gray-800">
+              <button
+                onClick={handleSubmit}
+                disabled={formLoading}
+                className={`w-full px-6 py-3 rounded-full font-bold shadow-md transition-colors duration-300 ${
+                  formLoading 
+                  ? "bg-gray-600 cursor-not-allowed" 
+                  : "bg-amber-400 text-gray-900 hover:bg-amber-500"
+                }`}
+              >
+                {formLoading ? (
+                  <span className="flex items-center justify-center">
+                    <Loader className="w-5 h-5 mr-2 animate-spin" />
+                    Creando...
+                  </span>
+                ) : "Crear servicio"}
+              </button>
             </div>
           </div>
         </div>
