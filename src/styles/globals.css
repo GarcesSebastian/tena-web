@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 10px;
+    transition: background 0.3s;
+  }
+}
+
+@layer base {
+  :root {
+    --background: rgb(255, 255, 255);
+    --foreground: rgb(10, 10, 10);
+    --card: rgb(255, 255, 255);
+    --card-foreground: rgb(10, 10, 10);
+    --popover: rgb(255, 255, 255);
+    --popover-foreground: rgb(10, 10, 10);
+    --primary: rgb(23, 23, 23);
+    --primary-foreground: rgb(250, 250, 250);
+    --secondary: rgb(245, 245, 245);
+    --secondary-foreground: rgb(23, 23, 23);
+    --muted: rgb(245, 245, 245);
+    --muted-foreground: rgb(115, 115, 115);
+    --accent: rgb(245, 245, 245);
+    --accent-foreground: rgb(23, 23, 23);
+    --destructive: rgb(190, 30, 30);
+    --destructive-foreground: rgb(250, 250, 250);
+    --border: rgb(229, 229, 229);
+    --input: rgb(229, 229, 229);
+    --ring: rgb(10, 10, 10);
+    --chart-1: rgb(242, 140, 80);
+    --chart-2: rgb(48, 169, 153);
+    --chart-3: rgb(33, 84, 120);
+    --chart-4: rgb(227, 176, 80);
+    --chart-5: rgb(242, 160, 70);
+    --radius: 0.5rem;
+    --sidebar-background: rgb(250, 250, 250);
+    --sidebar-foreground: rgb(66, 66, 66);
+    --sidebar-primary: rgb(23, 23, 23);
+    --sidebar-primary-foreground: rgb(250, 250, 250);
+    --sidebar-accent: rgb(244, 244, 244);
+    --sidebar-accent-foreground: rgb(23, 23, 23);
+    --sidebar-border: rgb(209, 209, 209);
+    --sidebar-ring: rgb(59, 130, 246);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
