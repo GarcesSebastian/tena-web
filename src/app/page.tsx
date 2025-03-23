@@ -46,40 +46,14 @@ export default function Home() {
         },
         (error) => {
           console.error('Error obteniendo la geolocalización:', error);
-          
-          switch(error.code) {
-            case error.POSITION_UNAVAILABLE:
-              fallbackToIpGeolocation();
-              break;
-            case error.TIMEOUT:
-              fallbackToIpGeolocation();
-              break;
-            default:
-              fallbackToIpGeolocation();
-              break;
-          }
         },
         options
       );
     } else {
       console.error('Geolocalización no soportada en este navegador');
-      fallbackToIpGeolocation();
     }
   }, []);
   
-  const fallbackToIpGeolocation = () => {
-    console.log("Usando geolocalización por IP como respaldo");
-    
-    fetch(`${API_URL}/user/get-ip-location`)
-      .then(response => response.json())
-      .then(data => {
-        console.log("Ubicación por IP:", data);
-      })
-      .catch(err => {
-        console.error("Error al obtener ubicación por IP:", err);
-      });
-  };
-
   return (
     <div className="relative w-full h-screen overflow-hidden bg-gradient-to-br from-gray-800 to-gray-900">
       <MenuButton/>
